@@ -5,8 +5,8 @@ $user = "root";
 $pass = "";
 $db = "concessionaria";
 
-$con = new mysqli($host, $user, $pass, $db);
+$conn = new mysqli($host, $user, $pass, $db);
 
-if ($con->connect_error){
-    die("Erro de conexão: " .$con->connect_error);
+if ($conn->connect_error){
+    die("Erro de conexão: " .$conn->connect_error);
 }

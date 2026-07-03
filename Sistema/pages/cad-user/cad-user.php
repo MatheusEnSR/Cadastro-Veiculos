@@ -9,41 +9,34 @@
                 </p>
             </div>
 
-            <form action=" " class="form-group">
-        <label for="">
+            <form action="?page=salvar" method="POST" class="form-group">
+                 <input type="hidden" name="acao" value="cadastrar">
+        <label>
             Nome
         </label>
         <input type="text" id="nome" class="form-input" name="nome" placeholder="Escreva seu nome">
 
-    </form>
+ 
 
 
-               <form action=" " class="form-group">
-        <label for="">
+
+        <label>
             Email
         </label>
         <input type="email" id="email" class="form-input" name="email" placeholder="Escreva seu email">
 
-    </form>
 
-       <form action=" " class="form-group">
-        <label for="">
+
+
+        <label>
             Senha
         </label>
-        <input type="password" id="senha" class="form-input" name="senha"  placeholder="senha">
+        <input type="password" id="senha" class="form-input" name="senha"  placeholder="Escreva sua senha">
 
-    </form>
 
     <button type="submit" class="login-button" >
-        Entrar
+        Cadastrar-se
     </button>
-    <div class="login-footer">
-        <p></p>
-        <div class="singup-options">
-       <a href="index.php?page=cad-user">Cadastre-se</a>
-
-        
-        </div>
-    </div>
+   </form>
         </div>
     </section>

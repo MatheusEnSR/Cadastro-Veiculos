@@ -63,6 +63,7 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#050505", endC
 
 .form-group {
   margin-bottom: 20px;
+
 }
 
 .form-group label {
@@ -72,6 +73,7 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#050505", endC
   color: #333;
   font-weight: 500;
   gap: 8px;
+  margin-top: 3px;
 }
 
 .input-icon {
@@ -104,6 +106,10 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#050505", endC
   font-size: 15px;
   transition: all 0.3s ease;
   box-sizing: border-box;
+  
+}
+.form-group > input{
+  margin-top: 5px;
 }
 
 .form-group input:focus {
@@ -162,6 +168,7 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#050505", endC
   font-weight: 600;
   cursor: pointer;
   transition: transform 0.2s ease, opacity 0.3s ease;
+  margin-top: 20px;
 }
 
 .login-button:hover:not(:disabled) {

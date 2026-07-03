@@ -2,7 +2,7 @@ body{
     height: 102vh;
 
     background: #050505;
-background: -webkit-linear-gradient(158deg, rgba(5, 5, 5, 1) 0%, rgba(107, 7, 17, 1) 0%, rgba(8, 10, 8, 1) 70%);
+background: -webkit-linear-gradient(158deg, rgba(5, 5, 5, 1) 0%, #6b0711 0%, rgba(8, 10, 8, 1) 70%);
 background: -moz-linear-gradient(158deg, rgba(5, 5, 5, 1) 0%, rgba(107, 7, 17, 1) 0%, rgba(8, 10, 8, 1) 70%);
 background: linear-gradient(158deg, rgba(5, 5, 5, 1) 0%, rgba(107, 7, 17, 1) 0%, rgba(8, 10, 8, 1) 70%);
 filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#050505", endColorstr="#080A08", GradientType=0);

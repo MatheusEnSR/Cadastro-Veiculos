@@ -1,5 +1,4 @@
-
-    <section class="login-container">
+<section class="login-container">
         <div class="login-card">
             <div class="login-header">
                 <h1>
@@ -9,33 +8,27 @@
                 </p>
             </div>
 
+            <form action="?page=salvar" method="POST" class="form-group">
+                <input type="hidden" name="acao" value="login">
 
-               <form action=" " class="form-group">
-        <label for="">
-            Email
-        </label>
-        <input type="email" id="email" class="form-input" name="email" placeholder="Escreva seu email">
+                <label>
+                    Email
+                </label>
+                <input type="email" id="email" class="form-input" name="email" placeholder="Escreva seu email">
 
-    </form>
+                <label>
+                    Senha
+                </label>
+                <input type="password" id="senha" class="form-input" name="senha" placeholder="Escreva sua senha">
 
-       <form action=" " class="form-group">
-        <label for="">
-            Senha
-        </label>
-        <input type="password" id="senha" class="form-input" name="senha"  placeholder="senha">
-
-    </form>
-
-    <button type="submit" class="login-button" >
-        Entrar
-    </button>
-    <div class="login-footer">
-        <p></p>
-        <div class="singup-options">
-       <a href="index.php?page=cad-user">Cadastre-se</a>
-
-        
-        </div>
-    </div>
+                <button type="submit" class="login-button">
+                    Entrar
+                </button>
+                <div class="login-footer">
+                    <p></p>
+                    <div style="margin-top: 10px;">
+                        <a href="index.php?page=cad-user">Cadastre-se</a>
+                    </div>
+                </div>
         </div>
     </section>

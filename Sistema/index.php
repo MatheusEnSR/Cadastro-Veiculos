@@ -59,6 +59,10 @@ switch ($pagina) {
         require "functions/salvar-user.php";
         break;
 
+    case 'config-model':
+        require "functions/config-model.php";
+        break;
+
     default:
         echo "<h2>Página não encontrada.</h2>";
 }

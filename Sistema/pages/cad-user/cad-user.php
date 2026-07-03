@@ -34,7 +34,7 @@
         <input type="password" id="senha" class="form-input" name="senha"  placeholder="Escreva sua senha">
 
 
-    <button type="submit" class="login-button" >
+    <button type="submit" class="login-button"  >
         Cadastrar-se
     </button>
    </form>

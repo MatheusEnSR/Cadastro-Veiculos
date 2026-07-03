@@ -113,3 +113,4 @@ switch ($acao) {
     default:
         print "<script>alert('Ação inválida.'); location.href='?page=login';</script>";
 }
+

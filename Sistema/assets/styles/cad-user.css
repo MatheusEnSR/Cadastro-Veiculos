@@ -317,3 +317,9 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#050505", endC
 .back-button:hover {
   color: #2A7A3A;
 }
+
+
+.content{
+    padding: 0;
+}
+

@@ -59,7 +59,7 @@ $viewsPermitidas = [
             </li>
 
         </ul>
-        <hr style="margin-top: 53vh;">
+        <hr style="margin-top: 44vh;">
         <div class="">
             <a href="#" class="d-flex align-items-center text-white text-decoration-none">
                 <svg width="32" height="32" class="rounded-circle me-2" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">

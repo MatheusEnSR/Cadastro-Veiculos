@@ -19,7 +19,7 @@ if ($modoEdicao) {
             <nav class="navag">
                 <div class="nav-left"></div>
                 <div class="nav-right">
-                    <button class="btn-novo" id="abrir">+ Novo projeto</button>
+                    <button class="btn-novo" id="abrir">+ Novo modelo</button>
                 </div>
             </nav>
         </header>

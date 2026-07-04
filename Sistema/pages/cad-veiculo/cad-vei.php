@@ -2,13 +2,13 @@
        <?php
 // Detecta se é edição: precisa vir explicitamente por GET, não só ter um id qualquer solto
 $modoEdicao = isset($_GET['acao']) && $_GET['acao'] === 'editar' && isset($_GET['id']);
-$modeloAtual = null;
+$veiAtual = null;
 
 if ($modoEdicao) {
-    $stmt = $conn->prepare("SELECT * FROM modelos WHERE id = ?");
+    $stmt = $conn->prepare("SELECT * FROM veiculos WHERE id = ?");
     $stmt->bind_param("i", $_GET['id']);
     $stmt->execute();
-    $modeloAtual = $stmt->get_result()->fetch_object();
+    $veiAtual = $stmt->get_result()->fetch_object();
     $stmt->close();
 }
 ?>
@@ -19,13 +19,18 @@ if ($modoEdicao) {
             <nav class="navag">
                 <div class="nav-left"></div>
                 <div class="nav-right">
-                    <button class="btn-novo" id="abrir">+ Novo projeto</button>
+                    <button class="btn-novo" id="abrir">+ Novo veículo</button>
                 </div>
             </nav>
         </header>
 
         <?php 
-        $sql = "SELECT * FROM modelos";
+      $sql = "SELECT
+            veiculos.*,
+            modelos.nome AS modelo
+        FROM veiculos
+        INNER JOIN modelos
+            ON veiculos.modelo_id = modelos.id";
         $res = $conn->query($sql);
         $qtd = $res->num_rows;
 
@@ -35,18 +40,31 @@ if ($modoEdicao) {
             print "<div class='card-head'><span class='card-title'>Listagem de modelos</span></div>";
             print "<div class='tbl-wrap'>";
             print "<table>";
-            print "<thead><tr><th>Id</th><th>Nome do modelo</th><th>Marca do veículo</th><th>Ações</th></tr></thead>";
+            
+            print "<thead>
+            <tr>
+            <th>Id</th>
+            <th>Placa</th>
+            <th>Cor</th>
+            <th>Ano</th>
+            <th>Modelo</th>
+            <th>Ações</th>
+            </tr>
+            </thead>";
+
             print "<tbody>";
 
             while ($row = $res->fetch_object()) {
                 print "<tr>";
                 print "<td class='bold'>" . $row->id . "</td>";
-                print "<td><span>" . htmlspecialchars($row->nome) . "</span></td>";
-                print "<td><span>" . htmlspecialchars($row->marca) . "</span></td>";
+                print "<td><span>" . htmlspecialchars($row->placa) . "</span></td>";
+                print "<td><span>" . htmlspecialchars($row->cor) . "</span></td>";
+                print "<td><span>" . htmlspecialchars($row->ano) . "</span></td>";
+                print "<td><span>" . htmlspecialchars($row->modelo) . "</span></td>";
                 print "<td>
                     <button class='btn btn-success btn-editar' type='button' data-id='" . $row->id . "'>Editar</button>
                     <button onclick=\"if (confirm('Tem certeza que deseja excluir?')) {
-                        location.href='index.php?page=config-model&acao=excluir&id=" . $row->id . "';
+                        location.href='index.php?page=config-vei&acao=excluir&id=" . $row->id . "';
                     }\" class='btn btn-danger'>Excluir</button>
                 </td>";
                 print "</tr>";
@@ -54,7 +72,7 @@ if ($modoEdicao) {
 
             print "</tbody></table></div></div></div>";
         } else {
-            print "<p>Nenhum modelo cadastrado.</p>";
+            print "<p>Nenhum veículo cadastrado.</p>";
         }
         ?>
     </main>
@@ -64,29 +82,65 @@ if ($modoEdicao) {
     <dialog class="proj-modal" id="cadPOPUP" style="border: none; padding:0;">
 
         <div class="proj-modal-head">
-            <span class="proj-modal-titulo"><?= $modoEdicao ? 'Editar modelo' : '+ Novo projeto' ?></span>
+            <span class="proj-modal-titulo"><?= $modoEdicao ? 'Editar veículo' : '+ Novo veículo' ?></span>
             <button class="proj-modal-fechar" id="fechar" type="button">×</button>
         </div>
 
-        <form action="index.php?page=config-model" method="POST">
+        <form action="index.php?page=config-vei" method="POST">
             <input type="hidden" name="acao" value="<?= $modoEdicao ? 'editar' : 'cadastrar' ?>">
             <?php if ($modoEdicao): ?>
-                <input type="hidden" name="id" value="<?= $modeloAtual->id ?>">
+                <input type="hidden" name="id" value="<?= $veiAtual->id ?>">
             <?php endif; ?>
 
             <div class="proj-modal-body">
                 <div>
-                    <label class="f-label">Nome do modelo *</label>
-                    <input class="f-input" name="nome" placeholder="Ex: Civic"
-                           value="<?= $modoEdicao ? htmlspecialchars($modeloAtual->nome) : '' ?>" required>
+                    <label class="f-label">Placa do veículo *</label>
+                    <input class="f-input" name="placa" placeholder="Ex: ABC1B34"
+                           value="<?= $modoEdicao ? htmlspecialchars($veiAtual->placa) : '' ?>"
+required>
                 </div>
 
                 <div>
-                    <label class="f-label">Marca do veículo*</label>
-                    <input class="f-input" name="marca" placeholder="Ex: Toyota"
-                           value="<?= $modoEdicao ? htmlspecialchars($modeloAtual->marca) : '' ?>" required>
+                    <label class="f-label">Cor do veículo*</label>
+                    <input class="f-input" name="cor" placeholder="Ex: Azul"
+                        value="<?= $modoEdicao ? htmlspecialchars($veiAtual->cor) : '' ?>" required>
                 </div>
+
+                <div>
+                    <label class="f-label">Ano do veículo*</label>
+                    <input type="number" class="f-input" name="ano" placeholder="Ex: 1996"
+                          value="<?= $modoEdicao ? htmlspecialchars($veiAtual->ano) : '' ?>"required>
+                </div>
+
+                <div>
+    <label class="f-label">Modelo *</label>
+
+    <select class="f-input" name="modelo_id" required>
+
+        <option value="">Selecione um modelo</option>
+
+        <?php
+        $sqlModelos = "SELECT * FROM modelos ORDER BY nome";
+        $resModelos = $conn->query($sqlModelos);
+
+        while($modelo = $resModelos->fetch_object()){
+
+            $selected = "";
+
+            if($modoEdicao && $veiAtual->modelo_id == $modelo->id){
+                $selected = "selected";
+            }
+
+            echo "<option value='$modelo->id' $selected>
+                    $modelo->nome - $modelo->marca
+                  </option>";
+        }
+        ?>
+
+    </select>
+</div>
             </div>
+
 
             <div class="proj-modal-footer">
                 <button type="button" class="btn-cancelar" id="cancelar">Cancelar</button>
@@ -122,7 +176,7 @@ if ($modoEdicao) {
     document.querySelectorAll(".btn-editar").forEach(btn => {
         btn.addEventListener("click", () => {
             const id = btn.dataset.id;
-            location.href = `?page=home&view=cad-model&acao=editar&id=${id}`;
+            location.href = `?page=home&view=cad-vei&acao=editar&id=${id}`;
         });
     });
 

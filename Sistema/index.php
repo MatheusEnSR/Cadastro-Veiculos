@@ -56,7 +56,7 @@ switch ($pagina) {
         break;
 
     case 'salvar':
-        require "functions/salvar-user.php";
+        require "functions/config-user.php";
         break;
 
     case 'config-model':

@@ -1,3 +1,5 @@
+
+
 .nav-right{
         display: flex;
     flex-direction: row-reverse;
@@ -39,6 +41,10 @@
     flex-direction: column;
     gap: 0px;
     height: 80vh;
+}
+
+.card{
+    padding: 10px;
 }
 
 
@@ -118,10 +124,7 @@ tbody td {
 }
 
 
-tbody tr:last-child td { border-bottom: none; }
-tbody tr:hover td { background: #121957; }
-.bold  { font-weight: 500; }
-.mono  { font-family: monospace; }
+
 
 
 

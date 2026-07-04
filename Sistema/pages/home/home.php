@@ -38,22 +38,22 @@ $viewsPermitidas = [
 
             <li class="nav-item">
                 <a href="?page=home&view=cad-model"
-                   class="nav-link <?= $view === 'cad-model' ? 'active' : '' ?>"
+                   class="nav-lin <?= $view === 'cad-model' ? 'active' : '' ?>"
                    style="color: white;">
                     Modelos
                 </a>
             </li>
 
-            <li>
+            <li class="nav-item">
                 <a href="?page=home&view=cad-veiculo"
-                   class="nav-link <?= $view === 'cad-veiculo' ? 'active' : '' ?> text-white">
+                   class="nav-lin <?= $view === 'cad-veiculo' ? 'active' : '' ?> text-white">
                     Veículos
                 </a>
             </li>
 
-            <li>
+            <li class="nav-item">
                 <a href="?page=home&view=cad-user"
-                   class="nav-link <?= $view === 'cad-user' ? 'active' : '' ?> text-white">
+                   class="nav-lin <?= $view === 'cad-user' ? 'active' : '' ?> text-white">
                     Usuarios
                 </a>
             </li>
@@ -71,7 +71,7 @@ $viewsPermitidas = [
 
     </div>
 
-    <div class="content">
+    <div class="principal">
         <?php
         if ($view === null) {
             echo '<h2>Bem-vindo(a)!</h2><p>Selecione uma opção no menu ao lado.</p>';

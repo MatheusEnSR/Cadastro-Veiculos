@@ -27,7 +27,7 @@ if ($modoEdicao) {
         <?php 
       $sql = "SELECT
             veiculos.*,
-            modelos.nome AS modelo
+            modelos.nome AS modelos
         FROM veiculos
         INNER JOIN modelos
             ON veiculos.modelo_id = modelos.id";
@@ -37,7 +37,7 @@ if ($modoEdicao) {
         if ($qtd > 0) {
             print "<div class='dash-grid'>";
             print "<div class='card'>";
-            print "<div class='card-head'><span class='card-title'>Listagem de modelos</span></div>";
+            print "<div class='card-head'><span class='card-title'>Listagem de veiculos</span></div>";
             print "<div class='tbl-wrap'>";
             print "<table>";
             
@@ -60,7 +60,7 @@ if ($modoEdicao) {
                 print "<td><span>" . htmlspecialchars($row->placa) . "</span></td>";
                 print "<td><span>" . htmlspecialchars($row->cor) . "</span></td>";
                 print "<td><span>" . htmlspecialchars($row->ano) . "</span></td>";
-                print "<td><span>" . htmlspecialchars($row->modelo) . "</span></td>";
+                print "<td><span>" . htmlspecialchars($row->modelos) . "</span></td>";
                 print "<td>
                     <button class='btn btn-success btn-editar' type='button' data-id='" . $row->id . "'>Editar</button>
                     <button onclick=\"if (confirm('Tem certeza que deseja excluir?')) {
@@ -72,7 +72,7 @@ if ($modoEdicao) {
 
             print "</tbody></table></div></div></div>";
         } else {
-            print "<p>Nenhum veículo cadastrado.</p>";
+            print "<p class='p'>Nenhum veículo cadastrado.</p>";
         }
         ?>
     </main>
@@ -144,7 +144,7 @@ required>
 
             <div class="proj-modal-footer">
                 <button type="button" class="btn-cancelar" id="cancelar">Cancelar</button>
-                <button type="submit" class="btn-salvar"><?= $modoEdicao ? 'Salvar alterações' : 'Cadastrar modelo' ?></button>
+                <button type="submit" class="btn-salvar"><?= $modoEdicao ? 'Salvar alterações' : 'Cadastrar veiculo' ?></button>
             </div>
         </form>
     </dialog>

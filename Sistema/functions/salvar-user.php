@@ -37,33 +37,52 @@ switch ($acao) {
         }
         break;
 
-    case 'login':
-        $email     = $_POST["email"] ?? '';
-        $senhaPura = $_POST["senha"] ?? '';
+  case 'login':
 
-        if ($email === '' || $senhaPura === '') {
-            print "<script>alert('Preencha email e senha.'); location.href='?page=login';</script>";
-            break;
-        }
+    $email = $_POST["email"] ?? '';
+    $senhaPura = $_POST["senha"] ?? '';
 
-        $sql = "SELECT id, nome, senha, status FROM usuarios WHERE email = ? LIMIT 1";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("s", $email);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $usuario = $result->fetch_assoc();
-        $stmt->close();
+    if ($email == '' || $senhaPura == '') {
+        echo "<script>
+                alert('Preencha email e senha.');
+                location.href='?page=login';
+              </script>";
+        exit;
+    }
 
-        if ($usuario && $usuario['status'] == 1 && password_verify($senhaPura, $usuario['senha'])) {
-            session_regenerate_id(true); 
-            $_SESSION['usuario_id']   = $usuario['id'];
+    $sql = "SELECT * FROM usuarios WHERE email = ? LIMIT 1";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+
+    $resultado = $stmt->get_result();
+
+    if($resultado->num_rows == 1){
+
+        $usuario = $resultado->fetch_assoc();
+
+        if(password_verify($senhaPura, $usuario['senha'])){
+
+            session_regenerate_id(true);
+
+            $_SESSION['usuario_id'] = $usuario['id'];
             $_SESSION['usuario_nome'] = $usuario['nome'];
-            header("Location: ?page=home");
+
+            $update = $conn->prepare("UPDATE usuarios SET online = 1 WHERE id = ?");
+            $update->bind_param("i",$usuario['id']);
+            $update->execute();
+
+            header("Location: index.php?page=home");
             exit;
-        } else {
-            print "<script>alert('Email ou senha inválidos'); location.href='?page=login';</script>";
         }
-        break;
+    }
+
+    echo "<script>
+            alert('Email ou senha inválidos');
+            location.href='?page=login';
+          </script>";
+
+break;
 
     case 'editar':
         $nome      = $_POST["nome"] ?? '';

@@ -7,7 +7,7 @@ $view = $_GET['view'] ?? null;
 // algo vindo do usuário sem validar, senão vira Local File Inclusion.
 $viewsPermitidas = [
     'cad-model'   => __DIR__ . '/../cad-model/cad-model.php',
-    'cad-veiculo' => __DIR__ . '/../cad-veiculo/cad-vei.php',
+    'cad-vei' => __DIR__ . '/../cad-veiculo/cad-vei.php',
     'cad-user'    => __DIR__ . '/../cad-user/cad-user.php',
 ];
 ?>
@@ -16,73 +16,102 @@ $viewsPermitidas = [
 
 <body>
 
-<nav class="navbar navbar-expand-lg">
-    <div class="container-fluid">
-        <a class="navbar-brand fw-bold" style="color: #710707;" href="index.php?page=home">
-            Car-Check
+    <div class="d-flex">
+
+        <div class="sidebar">
+            <div id="titulo">
+                <img src="https://i.pinimg.com/736x/0b/47/e3/0b47e3abfd7c19f1fbd7b2c1565fe756.jpg" class="hero-logo" alt="">
+                <h3>Check Car</h3>
+            </div>
+
+            <div id="principal">
+                <h1 class="nav-label">PRINCIPAL</h1>
+                <ul>
+                    <li class="nav-iten">
+                        <a href="?page=home&view=cad-model"
+                            class="nav-lin <?= $view === 'cad-model' ? 'active' : '' ?>"
+                            style="color: white;">
+                            Modelos
+                        </a>
+                    </li>
+
+                    <li class="nav-iten">
+                        <a href="?page=home&view=cad-vei"
+                            class="nav-lin <?= $view === 'cad-vei' ? 'active' : '' ?> text-white">
+                            Veículos
+                        </a>
+                    </li>
+
+                    <li class="nav-iten">
+                        <a href="?page=home&view=cad-user"
+                            class="nav-lin <?= $view === 'cad-user' ? 'active' : '' ?> text-white">
+                            Usuarios
+                        </a>
+                    </li>
+                </ul>
+                <div class="baixo" id="menuConta">
+    <button class="conta-btn" id="btnConta">
+        <i class="fa-solid fa-user"></i>
+        <span>Minha conta</span>
+    </button>
+
+    <div class="conta-menu" id="contaMenu" style="display: none;">
+        <a href="login.html" class="conta-menu-item">
+            <i class="fa-solid fa-user"></i>
+            Login
         </a>
+
+        <button class="conta-menu-item conta-menu-sair" id="btnSair">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Sair
+        </button>
     </div>
-</nav>
+</div>
+                    </div>
+        </div>
 
-<div class="d-flex">
-
-    <div class="sidebar">
-
-        <a class="d-flex align-items-center text-white text-decoration-none">
-            <span class="fs-4">Menu</span>
-        </a>
-
-        <hr>
-
-        <ul class="nav nav-pills flex-column">
-
-            <li class="nav-item">
-                <a href="?page=home&view=cad-model"
-                   class="nav-lin <?= $view === 'cad-model' ? 'active' : '' ?>"
-                   style="color: white;">
-                    Modelos
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a href="?page=home&view=cad-veiculo"
-                   class="nav-lin <?= $view === 'cad-veiculo' ? 'active' : '' ?> text-white">
-                    Veículos
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a href="?page=home&view=cad-user"
-                   class="nav-lin <?= $view === 'cad-user' ? 'active' : '' ?> text-white">
-                    Usuarios
-                </a>
-            </li>
-
-        </ul>
-        <hr style="margin-top: 44vh;">
-        <div class="">
-            <a href="/Sistema/pages/login/login.php" class="d-flex align-items-center text-white text-decoration-none">
-                <svg width="32" height="32" class="rounded-circle me-2" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
-                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
-                </svg>
-                <strong>Minha conta</strong>
-            </a>
+        <div class="principal">
+            <?php
+            if ($view === null) {
+                echo '<h2>Bem-vindo(a)!</h2><p>Selecione uma opção no menu ao lado.</p>';
+            } elseif (isset($viewsPermitidas[$view])) {
+                require $viewsPermitidas[$view];
+            } else {
+                echo '<p>Página não encontrada.</p>';
+            }
+            ?>
         </div>
 
     </div>
+    <script>const btnConta = document.getElementById("btnConta");
+const contaMenu = document.getElementById("contaMenu");
+const btnSair = document.getElementById("btnSair");
 
-    <div class="principal">
-        <?php
-        if ($view === null) {
-            echo '<h2>Bem-vindo(a)!</h2><p>Selecione uma opção no menu ao lado.</p>';
-        } elseif (isset($viewsPermitidas[$view])) {
-            require $viewsPermitidas[$view];
-        } else {
-            echo '<p>Página não encontrada.</p>';
-        }
-        ?>
-    </div>
+// Abre e fecha o menu
+btnConta.addEventListener("click", () => {
+    if (contaMenu.style.display === "block") {
+        contaMenu.style.display = "none";
+    } else {
+        contaMenu.style.display = "block";
+    }
+});
 
-</div>
+// Fecha o menu ao clicar fora
+document.addEventListener("click", (e) => {
+    const menu = document.getElementById("menuConta");
 
+    if (!menu.contains(e.target)) {
+        contaMenu.style.display = "none";
+    }
+});
+
+// Função de sair
+btnSair.addEventListener("click", () => {
+    localStorage.removeItem("usuario");
+    sessionStorage.clear();
+
+    alert("Você saiu da conta.");
+
+    window.location.href = "login";
+});</script>
 </body>

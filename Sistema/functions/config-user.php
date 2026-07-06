@@ -79,9 +79,9 @@ switch ($acao) {
         $stmt->close();
 
         if ($res) {
-            print "<script>alert('Editado com sucesso'); location.href='?page=cad-user';</script>";
+            print "<script>alert('Editado com sucesso'); location.href='index.php?page=home&view=cad-user';</script>";
         } else {
-            print "<script>alert('Não foi possível editar'); location.href='?page=cad-user';</script>";
+            print "<script>alert('Não foi possível editar'); location.href='index.php?page=home&view=cad-user';</script>";
         }
         break;
 

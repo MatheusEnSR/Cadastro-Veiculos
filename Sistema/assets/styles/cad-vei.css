@@ -336,3 +336,6 @@ tbody td {
     background: #534ab7;
 }
 
+main > .p{
+    color: white;
+}

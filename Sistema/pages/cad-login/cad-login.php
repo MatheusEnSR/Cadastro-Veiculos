@@ -2,14 +2,20 @@
         <div class="login-card">
             <div class="login-header">
                 <h1>
-                    Login
+                    Cadastre-se
                 </h1>
                 <p>
                 </p>
             </div>
 
-            <form action="?page=salvar" method="POST" class="form-group">
-                <input type="hidden" name="acao" value="login">
+           <form action="?page=config-cad" method="POST" class="form-group">
+                <input type="hidden" name="acao" value="cadastrar">
+
+                <label>
+                    Nome
+                </label>
+                <input type="text" id="nome" class="form-input" name="nome" placeholder="Escreva seu nome">
+
 
                 <label>
                     Email
@@ -21,14 +27,9 @@
                 </label>
                 <input type="password" id="senha" class="form-input" name="senha" placeholder="Escreva sua senha">
 
-                <button  href="index.php?page=home" type="submit" class="login-button" style="margin-top: 10px;">
+              <button href="index.php?page=login" type="submit" class="login-button" style="margin-top: 10px;">
                     Entrar
                 </button>
-                <div class="login-footer">
-                    <p></p>
-                    <div style="margin-top: 10px;">
-                        <a href="index.php?page=cad-login">Cadastre-se</a>
-                    </div>
-                </div>
+            </form>
         </div>
     </section>

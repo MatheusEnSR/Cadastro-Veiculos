@@ -5,15 +5,14 @@ $acao = $_REQUEST["acao"] ?? null;
 switch ($acao) {
 
     case 'cadastrar':
-        $placa  = $_POST["placa"] ?? '';
-        $cor = $_POST["cor"] ?? '';
-        $ano = $_POST["ano"] ?? '';
-         $modelo_id = $_POST["modelo_id"] ?? '';
-
+        $placa     = $_POST["placa"] ?? '';
+        $cor       = $_POST["cor"] ?? '';
+        $ano       = $_POST["ano"] ?? '';
+        $modelo_id = $_POST["modelo_id"] ?? '';
 
         $sql = "INSERT INTO veiculos (placa, cor, ano, modelo_id) VALUES (?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssss", $placa, $cor, $ano, $modelo_id);
+        $stmt->bind_param("sssi", $placa, $cor, $ano, $modelo_id);
         $res = $stmt->execute();
         $stmt->close();
 
@@ -25,13 +24,15 @@ switch ($acao) {
         break;
 
     case 'editar':
-        $placa  = $_POST["placa"] ?? '';
-        $cor = $_POST["cor"] ?? '';
-        $ano = $_POST["ano"] ?? '';
+        $placa     = $_POST["placa"] ?? '';
+        $cor       = $_POST["cor"] ?? '';
+        $ano       = $_POST["ano"] ?? '';
+        $modelo_id = $_POST["modelo_id"] ?? '';
+        $id        = $_REQUEST["id"] ?? 0;
 
-        $sql = "UPDATE veiculos SET placa = ?, cor, ano = ? WHERE id = ?";
+        $sql = "UPDATE veiculos SET placa = ?, cor = ?, ano = ?, modelo_id = ? WHERE id = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssi", $placa, $cor, $ano,  $id);
+        $stmt->bind_param("sssii", $placa, $cor, $ano, $modelo_id, $id);
         $res = $stmt->execute();
         $stmt->close();
 
@@ -54,7 +55,7 @@ switch ($acao) {
         if ($res) {
             print "<script>alert('Excluído com sucesso'); location.href='index.php?page=home&view=cad-vei';</script>";
         } else {
-            print "<script>alert('Não foi possível excluir'); location.href='index.php?page=home&view=cad-vei;</script>";
+            print "<script>alert('Não foi possível excluir'); location.href='index.php?page=home&view=cad-vei';</script>";
         }
         break;
 }

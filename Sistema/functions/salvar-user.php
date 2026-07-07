@@ -68,7 +68,7 @@ switch ($acao) {
             $_SESSION['usuario_id'] = $usuario['id'];
             $_SESSION['usuario_nome'] = $usuario['nome'];
 
-            $update = $conn->prepare("UPDATE usuarios SET online = 1 WHERE id = ?");
+            $update = $conn->prepare("UPDATE usuarios SET status = 1 WHERE id = ?");
             $update->bind_param("i",$usuario['id']);
             $update->execute();
 

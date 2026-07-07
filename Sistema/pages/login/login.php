@@ -21,7 +21,7 @@
                 </label>
                 <input type="password" id="senha" class="form-input" name="senha" placeholder="Escreva sua senha">
 
-                <button  href="index.php?page=home" type="submit" class="login-button" style="margin-top: 10px;">
+                <button  href="index.php?page=salvar" type="submit" class="login-button" style="margin-top: 10px;">
                     Entrar
                 </button>
                 <div class="login-footer">

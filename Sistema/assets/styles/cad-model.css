@@ -1,7 +1,5 @@
-
-
 .nav-right{
-        display: flex;
+    display: flex;
     flex-direction: row-reverse;
 }
 
@@ -22,17 +20,16 @@
     white-space: nowrap;
 }
 
-
 .lista-model {
   display: flex;
   flex-direction: column;
   flex: 1;
   overflow: hidden;
-  background: #f0eff7; 
-    height: 93vh;
+  background: #f0eff7;
+  height: 93vh;
 }
 
-.cards {
+.cards-listagem {
     flex: 1;
     padding: 5px 24px;
     background: #000000f5;
@@ -42,13 +39,6 @@
     gap: 0px;
     height: 80vh;
 }
-
-.card{
-    padding: 10px;
-}
-
-
-
 
 .dash-grid {
   display: grid;
@@ -65,7 +55,7 @@
 
 .card {
   background: #292929;
-   border: 1px solid #e8e6f8;
+  border: 1px solid #e8e6f8;
   border-radius: 12px;
   overflow: hidden;
 }
@@ -93,17 +83,11 @@
   font-family: inherit;
 }
 
-
-
-
-
 table {
   width: 100%;
   border-collapse: collapse;
   font-size: 12px;
 }
-
-
 
 thead th {
   padding: 8px 12px;
@@ -122,11 +106,6 @@ tbody td {
   color: #000000;
   vertical-align: middle;
 }
-
-
-
-
-
 
 .model-overlay {
     position: fixed;
@@ -158,7 +137,6 @@ tbody td {
     box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
     padding: 0;
     color: #fff;
-    display: flex;
     left: 32.5vw;
     top: 29vh;
 }
@@ -192,7 +170,6 @@ tbody td {
     color: #fff;
 }
 
-/* Body */
 .proj-modal-body {
     padding: 20px 24px;
     display: flex;
@@ -246,7 +223,6 @@ tbody td {
     gap: 12px;
 }
 
-/* Toggle Tipo de projeto */
 .tipo-toggle {
     display: flex;
     gap: 10px;
@@ -292,7 +268,6 @@ tbody td {
     margin-top: 2px;
 }
 
-/* Footer */
 .proj-modal-footer {
     display: flex;
     justify-content: flex-end;
@@ -335,4 +310,3 @@ tbody td {
 .btn-salvar:hover {
     background: #534ab7;
 }
-

@@ -1,11 +1,73 @@
+
+<style>
+
+/* ── Estilos para o código do ECHO novo ── */
+.metrica-card {
+    background: #292929;
+    margin-top: 10px;
+    border-radius: 12px;
+    padding: 14px 16px;
+}
+
+.metrica-label {
+    font-size: 10px;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.metrica-valor {
+    font-size: 24px;
+    font-weight: 600;
+    color: #A09EBB;
+    line-height: 1;
+}
+
+.card {
+    background: #292929;
+    border: 1px solid #e8e6f8;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.card-head {
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #1f1e1e;
+}
+.card{
+    margin-left: 20px;
+}
+
+.card-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #A09EBB;
+}
+
+.card-action {
+    font-size: 11px;
+    color: #534ab7;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+.card-action:hover { text-decoration: underline; }
+
+.tbl-wrap { overflow-x: auto; }
+</style>
+
 <?php
-// Qual conteúdo mostrar dentro da área central da home.
-// Vem da URL: ?page=home&view=cad-model
+
 $view = $_GET['view'] ?? null;
 
-// Lista branca de views permitidas — nunca dar require direto em
-// algo vindo do usuário sem validar, senão vira Local File Inclusion.
 $viewsPermitidas = [
+    'home'   => __DIR__ . 'home.php',
     'cad-model'   => __DIR__ . '/../cad-model/cad-model.php',
     'cad-vei' => __DIR__ . '/../cad-veiculo/cad-vei.php',
     'cad-user'    => __DIR__ . '/../cad-user/cad-user.php',
@@ -27,6 +89,15 @@ $viewsPermitidas = [
             <div id="principal">
                 <h1 class="nav-label">PRINCIPAL</h1>
                 <ul>
+                    
+                <li class="nav-iten">
+                        <a href="?page=home"
+                            class="nav-lin <?= $view === 'home' ? 'active' : '' ?>"
+                            style="color: white;">
+                            Inicio
+                        </a>
+                    </li>
+
                     <li class="nav-iten">
                         <a href="?page=home&view=cad-model"
                             class="nav-lin <?= $view === 'cad-model' ? 'active' : '' ?>"
@@ -73,7 +144,82 @@ $viewsPermitidas = [
         <div class="principal">
             <?php
             if ($view === null) {
-                echo '<h2>Bem-vindo(a)!</h2><p>Selecione uma opção no menu ao lado.</p>';
+            
+echo '<div class="container-fluid p-0">
+    <div class="row g-3 mb-4">
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="metrica-card">
+                <div class="metrica-label">Usuarios Ativos</div>
+                <div class="metrica-valor">7</div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="metrica-card">
+                <div class="metrica-label">Usuarios inativos</div>
+                <div class="metrica-valor">2</div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="metrica-card">
+                <div class="metrica-label">Modelos cadastrados</div>
+                <div class="metrica-valor">1</div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-3">
+            <div class="metrica-card">
+                <div class="metrica-label">Veiculos cadastrados</div>
+                <div class="metrica-valor">3</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-3">
+        <div class="col-12 col-lg-8">
+            <div class="card">
+                <div class="card-head">
+                    <span class="card-title">Resumo dos Projetos</span>
+                    <button class="card-action">3 projeto(s)</button>
+                </div>
+                <div class="tbl-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Cliente</th>
+                                <th>Projeto</th>
+                                <th>Tipo</th>
+                                <th>Status</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="bold">Ana Souza</td>
+                                <td><span class="badge">Site institucional</span></td>
+                                <td><span class="badge">Serviço Único</span></td>
+                                <td><span class="badge">Concluído</span></td>
+                                <td class="bold mono">R$&nbsp;2.800,00</td>
+                            </tr>
+                            <tr>
+                                <td class="bold">Carlos Mendes</td>
+                                <td><span class="badge">App de delivery</span></td>
+                                <td><span class="badge">Serviço Único</span></td>
+                                <td><span class="badge">Em andamento</span></td>
+                                <td class="bold mono">R$&nbsp;12.000,00</td>
+                            </tr>
+                            <tr>
+                                <td class="bold">Loja BellaVida</td>
+                                <td><span class="badge">Dashboard financeiro</span></td>
+                                <td><span class="badge">Plano</span></td>
+                                <td><span class="badge">Concluído</span></td>
+                                <td class="bold mono">R$&nbsp;350,00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>';
             } elseif (isset($viewsPermitidas[$view])) {
                 require $viewsPermitidas[$view];
             } else {

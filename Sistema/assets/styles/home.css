@@ -1,312 +1,304 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+/* ── Reset e Configurações Gerais ── */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 html,
-body{
-    width:100%;
-    height:100%;
-    overflow:hidden;
-    background:#111827;
-    font-family:Arial, Helvetica, sans-serif;
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #111827;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Layout principal */
-
-.home-container{
-    display:flex;
-    height:100vh;
-    width:100%;
+/* ── Layout Principal e Estrutura ── */
+.home-container {
+    display: flex;
+    height: 100vh;
+    width: 100%;
 }
 
-/* Sidebar */
-
-.sidebar{
-    width:260px;
-    min-width:260px;
-    background:#1f2937;
-    color:#fff;
-    display:flex;
-    flex-direction:column;
-    padding:20px 15px;
-    overflow-y:auto;
+.principal {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: black;
 }
 
-.sidebar h4{
-    margin-bottom:25px;
+.content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 25px;
+    background: #111827;
 }
 
-.nav-item{
-    list-style:none;
-    margin-bottom:8px;
-    width:100%;
+/* Scrollbar Customizada */
+.content::-webkit-scrollbar {
+    width: 8px;
 }
 
-.nav-lin{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    width:100%;
-    padding:12px 15px;
-    border-radius:8px;
-    text-decoration:none;
-    color:#d1d5db;
-    transition:.3s;
+.content::-webkit-scrollbar-thumb {
+    background: #4b5563;
+    border-radius: 20px;
 }
 
-.nav-lin:hover{
-    background:#374151;
-    color:#fff;
-}
-
-.nav-lin.active{
-    background:#2563eb;
-    color:#fff;
-}
-
-/* Conteúdo */
-
-.principal{
-    flex:1;
-    display:flex;
-    flex-direction:column;
-    overflow:hidden;
-}
-
-/* Navbar */
-
-.navbar{
-    background:#1f2937 !important;
-    border-bottom:1px solid #374151;
+/* ── Navbar ── */
+.navbar {
+    background: #1f2937 !important;
+    border-bottom: 1px solid #374151;
 }
 
 .navbar .navbar-brand,
-.navbar .nav-link{
-    color:#fff !important;
+.navbar .nav-link {
+    color: #fff !important;
 }
 
-.bg-body-tertiary{
-    background:#1f2937 !important;
+.bg-body-tertiary {
+    background: #1f2937 !important;
 }
 
-/* Área onde carregam as páginas */
-
-.content{
-    flex:1;
-    overflow-y:auto;
-    padding:25px;
-    background:#111827;
-}
-
-/* Scroll */
-
-.content::-webkit-scrollbar{
-    width:8px;
-}
-
-.content::-webkit-scrollbar-thumb{
-    background:#4b5563;
-    border-radius:20px;
-}
-
-/* Responsivo */
-
-@media(max-width:768px){
-
-    .sidebar{
-        width:220px;
-        min-width:220px;
-    }
-
-    .content{
-        padding:15px;
-    }
-
-}
-
-/* sidebar.css */
+/* ── Sidebar (Unificada e Limpa) ── */
 .sidebar {
-  width: 220px;
-  height: 100vh;
-  background: #000000;
-  border-right: 1px solid #3a3a3a;
-  display: flex;
-  flex-direction: column;
-  flex-shrink: 0;
-  overflow: hidden;
+    width: 220px;
+    min-width: 220px;
+    height: 100vh;
+    background: #000000;
+    border-right: 1px solid #3a3a3a;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    overflow: hidden;
 }
 
-/* ── Logo ── */
 #titulo {
-  padding: 18px 14px;
-  border-bottom: 1px solid #1f1e1e;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+    padding: 18px 14px;
+    border-bottom: 1px solid #1f1e1e;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .hero-logo {
-  width: 34px;
-  height: 34px;
-  background: #3C3489;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    object-fit: cover;
+    flex-shrink: 0;
 }
 
 #titulo h3 {
-  font-size: 13px;
-  font-weight: 600;
-  color: #ffffff;
-  line-height: 1.2;
+    font-size: 13px;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 1.2;
+    margin: 0;
 }
 
-
-
-/* ── Navegação ── */
 #principal {
-  flex: 1;
-  padding: 10px 8px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  overflow: hidden;
+    flex: 1;
+    padding: 10px 8px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 
 #principal ul {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 0;
 }
 
 .nav-label {
-  font-size: 12px;
-  color: #ffffff;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-weight: 600;
-  padding: 12px 10px 4px;
+    font-size: 12px;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    padding: 12px 10px 4px;
+    margin: 0;
 }
 
-.nav-item {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  padding: 8px 10px;
-  border-radius: 8px;
-  font-size: 13px;
-  color: #A09EBB;
-  cursor: pointer;
-  transition: background 0.15s, color 0.15s;
+.nav-iten {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #A09EBB;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
 }
 
-.nav-item:hover {
-  background: #121957;
-  color: #ffffff;
+.nav-iten:hover {
+    background: #121957;
+    color: #ffffff;
 }
 
-.nav-item.active {
-  background: #121957;
-  color: #ffffff;
-  font-weight: 500;
+.nav-lin {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    text-decoration: none;
+    color: inherit;
 }
 
-/* ── Rodapé ── */
+.nav-lin.active {
+    color: #ffffff !important;
+    font-weight: 500;
+}
+
+.nav-iten:has(.nav-lin.active) {
+    background: #121957;
+}
+
+/* Rodapé da Sidebar e Menu de Conta */
 .baixo {
-  padding: 12px 14px;
-  border-top: 1px solid #3a3a3a;
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  top: 56%;
-}
-
-.hero-visual img{
-  width: 32%;
-  height: 32%;
-  border-radius: 50%;
-  background: #3C3489;
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 11px;
-  font-weight: 600;
-  flex-shrink: 0;
-}
-
-/* ── Conta (dropdown) — adicionar ao final de sidebar.css ── */
-.baixo {
-  position: relative;
+    padding: 12px 14px;
+    border-top: 1px solid #3a3a3a;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    position: relative;
+    top: 61%;
 }
 
 .conta-btn {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  background: none;
-  border: none;
-  color: #A09EBB;
-  font-size: 12px;
-  font-family: inherit;
-  cursor: pointer;
-  padding: 6px 4px;
-  border-radius: 8px;
-  transition: background 0.15s, color 0.15s;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    background: none;
+    border: none;
+    color: #A09EBB;
+    font-size: 12px;
+    font-family: inherit;
+    cursor: pointer;
+    padding: 6px 4px;
+    border-radius: 8px;
+    transition: background 0.15s, color 0.15s;
 }
+
 .conta-btn:hover {
-  background: #121957;
-  color: #ffffff;
+    background: #121957;
+    color: #ffffff;
 }
-.conta-btn svg { font-size: 16px; flex-shrink: 0; }
+
+.conta-btn svg {
+    font-size: 16px;
+    flex-shrink: 0;
+}
 
 .conta-menu {
-  position: absolute;
-  bottom: calc(100% + 8px);
-  left: 14px;
-  right: 14px;
-  background: #121212;
-  border: 1px solid #2a2a2a;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-  animation: contaMenuFade 0.12s ease;
-  z-index: 20;
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 14px;
+    right: 14px;
+    background: #121212;
+    border: 1px solid #2a2a2a;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    animation: contaMenuFade 0.12s ease;
+    z-index: 20;
 }
 
 @keyframes contaMenuFade {
-  from { opacity: 0; transform: translateY(4px); }
-  to   { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(4px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
 .conta-menu-item {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  background: none;
-  border: none;
-  color: #d8d6ef;
-  font-size: 12.5px;
-  font-family: inherit;
-  padding: 10px 12px;
-  cursor: pointer;
-  transition: background 0.12s;
-  text-align: left;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    background: none;
+    border: none;
+    color: #d8d6ef;
+    font-size: 12.5px;
+    font-family: inherit;
+    padding: 10px 12px;
+    cursor: pointer;
+    transition: background 0.12s;
+    text-align: left;
+    text-decoration: none;
 }
-.conta-menu-item svg { font-size: 14px; flex-shrink: 0; }
-.conta-menu-item:hover { background: #1c1c2e; }
+
+.conta-menu-item:hover {
+    background: #1c1c2e;
+}
 
 .conta-menu-sair {
-  color: #E24B4A;
-  border-top: 1px solid #232323;
+    color: #E24B4A;
+    border-top: 1px solid #232323;
 }
-.conta-menu-sair:hover { background: #2a1414; }
+
+.conta-menu-sair:hover {
+    background: #2a1414;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+
+thead th {
+    padding: 8px 12px;
+    text-align: left;
+    font-size: 9px;
+    font-weight: 600;
+    color: #9ca3af; /* Corrigido para contraste no escuro */
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    border-bottom: 1px solid #e8e6f8;
+}
+
+tbody td {
+    padding: 9px 12px;
+    border-bottom: 1px solid #3a3a3a;
+    color: #e5e7eb; /* Corrigido de #000000 para legibilidade */
+    vertical-align: middle;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+tbody tr:hover td {
+    background: #121957;
+}
+
+.bold { font-weight: 500; }
+.mono { font-family: monospace; }
+
+.badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: 500;
+    background: #374151;
+    color: #ffffff;
+}
+
+/* ── Responsivo Geral ── */
+@media(max-width: 768px) {
+    .sidebar {
+        width: 220px;
+        min-width: 220px;
+    }
+    .content {
+        padding: 15px;
+    }
+}

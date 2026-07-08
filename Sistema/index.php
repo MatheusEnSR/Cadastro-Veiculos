@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 require_once "config/conexao.php";
 
 $pagina = $_GET['page'] ?? 'login';
@@ -21,8 +22,7 @@ $pagina = $_GET['page'] ?? 'login';
     if (file_exists("assets/styles/$pagina.css")) {
         echo '<link rel="stylesheet" href="assets/styles/' . $pagina . '.css">';
     }
-    // Dentro da home, o conteúdo do meio pode ser cad-user/cad-model/cad-vei,
-    // então já deixamos o CSS deles disponível também.
+
     if ($pagina === 'home') {
         foreach (['cad-user', 'cad-model', 'cad-vei'] as $extra) {
             if (file_exists("assets/styles/$extra.css")) {
@@ -39,12 +39,11 @@ $pagina = $_GET['page'] ?? 'login';
 
     switch ($pagina) {
 
-
     case 'login':
         require "pages/login/login.php";
         break;
 
-     case 'cad-login':
+    case 'cad-login':
         require "pages/cad-login/cad-login.php";
         break;
 
@@ -84,9 +83,13 @@ $pagina = $_GET['page'] ?? 'login';
         require "functions/config-vei.php";
         break;
 
+    case 'logout':
+        require "functions/logout.php";
+        break;
+
     default:
         echo "<h2>Página não encontrada.</h2>";
-}
+    }
 
     ?>
 

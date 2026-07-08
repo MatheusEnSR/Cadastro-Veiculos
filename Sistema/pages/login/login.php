@@ -12,9 +12,9 @@
                 <input type="hidden" name="acao" value="login">
 
                 <label>
-                    Email
+                    Login
                 </label>
-                <input type="email" id="email" class="form-input" name="email" placeholder="Escreva seu email">
+                <input type="text" id="login" class="form-input" name="login" placeholder="Escreva seu login">
 
                 <label>
                     Senha

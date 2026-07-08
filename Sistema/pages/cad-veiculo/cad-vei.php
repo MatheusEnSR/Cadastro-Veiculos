@@ -1,6 +1,6 @@
 
        <?php
-// Detecta se é edição: precisa vir explicitamente por GET, não só ter um id qualquer solto
+
 $modoEdicao = isset($_GET['acao']) && $_GET['acao'] === 'editar' && isset($_GET['id']);
 $veiAtual = null;
 
@@ -56,12 +56,12 @@ if ($modoEdicao) {
 
             while ($row = $res->fetch_object()) {
                 print "<tr>";
-                print "<td class='bold'>" . $row->id . "</td>";
+                print "<td class='bold radius1'>" . $row->id . "</td>";
                 print "<td><span>" . htmlspecialchars($row->placa) . "</span></td>";
                 print "<td><span>" . htmlspecialchars($row->cor) . "</span></td>";
                 print "<td><span>" . htmlspecialchars($row->ano) . "</span></td>";
                 print "<td><span>" . htmlspecialchars($row->modelos) . "</span></td>";
-                print "<td>
+                print "<td class='radius2'>
                     <button class='btn btn-success btn-editar' type='button' data-id='" . $row->id . "'>Editar</button>
                     <button onclick=\"if (confirm('Tem certeza que deseja excluir?')) {
                         location.href='index.php?page=config-vei&acao=excluir&id=" . $row->id . "';
@@ -171,8 +171,7 @@ required>
     botaoFechar.addEventListener("click", fecharModal);
     botaoCancelar.addEventListener("click", fecharModal);
 
-    // Botões "Editar" recarregam a página com os parâmetros certos,
-    // o PHP acima detecta isso e já abre o modal preenchido.
+
     document.querySelectorAll(".btn-editar").forEach(btn => {
         btn.addEventListener("click", () => {
             const id = btn.dataset.id;
@@ -181,7 +180,7 @@ required>
     });
 
     <?php if ($modoEdicao): ?>
-    // Já abre o modal automaticamente ao recarregar em modo edição
+
     window.addEventListener("DOMContentLoaded", abrirModal);
     <?php endif; ?>
 </script>

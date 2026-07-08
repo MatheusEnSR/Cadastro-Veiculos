@@ -1,6 +1,6 @@
 <?php
 
-// Sessão é necessária para guardar o usuário logado
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -13,10 +13,10 @@ switch ($acao) {
         $nome      = $_POST["nome"] ?? '';
         $email     = $_POST["email"] ?? '';
         $senhaPura = $_POST["senha"] ?? '';
-        $dataNasc  = $_POST["data_nasc"] ?? null;
+        $login     = $_POST["login"] ?? null;
 
-        if ($nome === '' || $email === '' || $senhaPura === '') {
-            print "<script>alert('Preencha todos os campos.'); location.href='?page=cad-user';</script>";
+        if ($nome === '' || $email === '' || $login === '' || $senhaPura === '' ) {
+            print "<script>alert('Preencha todos os campos.'); location.href='?page=cad-login';</script>";
             break;
         }
 
@@ -24,27 +24,27 @@ switch ($acao) {
         $senhaHash = password_hash($senhaPura, PASSWORD_DEFAULT);
 
 
-        $sql = "INSERT INTO usuarios (nome, email, senha, status) VALUES (?, ?, ?, 1)";
+        $sql = "INSERT INTO usuarios (nome, email, senha, login, status) VALUES (?, ?, ?, ?, 1)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sss", $nome, $email, $senhaHash);
+        $stmt->bind_param("ssss", $nome, $email, $senhaHash, $login);
         $res = $stmt->execute();
         $stmt->close();
 
         if ($res) {
             print "<script>alert('Cadastro com sucesso'); location.href='?page=login';</script>";
         } else {
-            print "<script>alert('Não foi possível cadastrar'); location.href='?page=cad-user';</script>";
+            print "<script>alert('Não foi possível cadastrar'); location.href='?page=cad-login';</script>";
         }
         break;
 
   case 'login':
 
-    $email = $_POST["email"] ?? '';
+    $login = $_POST["login"] ?? '';
     $senhaPura = $_POST["senha"] ?? '';
 
-    if ($email == '' || $senhaPura == '') {
+    if ($login == '' || $senhaPura == '') {
         echo "<script>
-                alert('Preencha email e senha.');
+                alert('Preencha login e senha.');
                 location.href='?page=login';
               </script>";
         exit;
@@ -52,7 +52,7 @@ switch ($acao) {
 
     $sql = "SELECT * FROM usuarios WHERE email = ? LIMIT 1";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $email);
+    $stmt->bind_param("s", $login);
     $stmt->execute();
 
     $resultado = $stmt->get_result();
@@ -87,20 +87,20 @@ break;
     case 'editar':
         $nome      = $_POST["nome"] ?? '';
         $email     = $_POST["email"] ?? '';
-        $dataNasc  = $_POST["data_nasc"] ?? null;
+        $login     = $_POST["login"] ?? null;
         $id        = $_REQUEST["id"] ?? 0;
         $senhaPura = $_POST["senha"] ?? '';
 
         if ($senhaPura !== '') {
             // Só re-hasheia se o usuário digitou uma nova senha
             $senhaHash = password_hash($senhaPura, PASSWORD_DEFAULT);
-            $sql = "UPDATE usuarios SET nome = ?, email = ?, senha = ? WHERE id = ?";
+            $sql = "UPDATE usuarios SET nome = ?, email = ?, senha = ?, login = ? WHERE id = ?";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("sssi", $nome, $email, $senhaHash, $id);
+            $stmt->bind_param("ssssi", $nome, $email, $senhaHash,  $login, $id);
         } else {
-            $sql = "UPDATE usuarios SET nome = ?, email = ? WHERE id = ?";
+            $sql = "UPDATE usuarios SET nome = ?, email = ? login = ? WHERE id = ?";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("ssi", $nome, $email, $id);
+            $stmt->bind_param("sssi", $nome, $email, $login, $id);
         }
 
         $res = $stmt->execute();
@@ -132,4 +132,3 @@ break;
     default:
         print "<script>alert('Ação inválida.'); location.href='?page=login';</script>";
 }
-

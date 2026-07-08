@@ -89,7 +89,7 @@ switch ($acao) {
         $id = $_REQUEST["id"] ?? 0;
 
         if ((int)$id <= 0) {
-            print "<script>alert('ID inválido para exclusão'); location.href='?page=cad-user';</script>";
+            print "<script>alert('ID inválido para exclusão'); location.href='index.php?page=home&view=cad-user';</script>";
             break;
         }
 
@@ -97,7 +97,7 @@ switch ($acao) {
         $stmt = $conn->prepare($sql);
 
         if (!$stmt) {
-            print "<script>alert('Erro SQL: " . addslashes($conn->error) . "'); location.href='?page=cad-user';</script>";
+            print "<script>alert('Erro SQL: " . addslashes($conn->error) . "'); location.href='index.php?page=home&view=cad-user';</script>";
             break;
         }
 
@@ -106,12 +106,12 @@ switch ($acao) {
         $stmt->close();
 
         if ($res) {
-            print "<script>alert('Excluído com sucesso'); location.href='?page=cad-user';</script>";
+            print "<script>alert('Excluído com sucesso'); location.href='index.php?page=home&view=cad-user';</script>";
         } else {
-            print "<script>alert('Não foi possível excluir'); location.href='?page=cad-user';</script>";
+            print "<script>alert('Não foi possível excluir'); location.href='index.php?page=home&view=cad-user';</script>";
         }
         break;
 
     default:
-        print "<script>alert('Ação inválida.'); location.href='?page=cad-user';</script>";
+        print "<script>alert('Ação inválida.'); location.href='index.php?page=home&view=cad-user';</script>";
 }

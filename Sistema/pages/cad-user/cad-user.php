@@ -1,5 +1,4 @@
 <?php
-// Detecta se é edição: precisa vir explicitamente por GET, não só ter um id qualquer solto
 $modoEdicao = isset($_GET['acao']) && $_GET['acao'] === 'editar' && isset($_GET['id']);
 $userAtual = null;
 
@@ -23,7 +22,7 @@ if ($modoEdicao) {
             </nav>
         </header>
 
-        <?php 
+        <?php
         $sql = "SELECT * FROM usuarios";
         $res = $conn->query($sql);
         $qtd = $res->num_rows;
@@ -47,13 +46,17 @@ if ($modoEdicao) {
             print "<tbody>";
 
             while ($row = $res->fetch_object()) {
+                $statusBadge = ($row->status == 1)
+                    ? "<span class='badge bg-success'>Ativo</span>"
+                    : "<span class='badge bg-danger'>Inativo</span>";
+
                 print "<tr>";
-                print "<td class='bold'>" . $row->id . "</td>";
+                print "<td class='bold radius1'>" . $row->id . "</td>";
                 print "<td><span>" . htmlspecialchars($row->nome) . "</span></td>";
                 print "<td><span>" . htmlspecialchars($row->email) . "</span></td>";
                 print "<td><span>" . htmlspecialchars($row->login) . "</span></td>";
-                print "<td><span>" . htmlspecialchars($row->status) . "</span></td>";
-                print "<td>
+                print "<td>" . $statusBadge . "</td>";
+                print "<td class='radius2'>
                     <button class='btn btn-success btn-editar' type='button' data-id='" . $row->id . "'>Editar</button>
                     <button onclick=\"if (confirm('Tem certeza que deseja excluir?')) {
                         location.href='index.php?page=config-user&acao=excluir&id=" . $row->id . "';
@@ -61,7 +64,6 @@ if ($modoEdicao) {
                 </td>";
                 print "</tr>";
             }
-
             print "</tbody></table></div></div></div>";
         } else {
             print "<p>Nenhum usuarios cadastrado.</p>";
@@ -88,23 +90,23 @@ if ($modoEdicao) {
                 <div>
                     <label class="f-label">Nome do usuario *</label>
                     <input type="text" class="f-input" name="nome" placeholder="Ex: Matheus"
-                           value="<?= $modoEdicao ? htmlspecialchars($userAtual->nome) : '' ?>" required>
+                        value="<?= $modoEdicao ? htmlspecialchars($userAtual->nome) : '' ?>" required>
                 </div>
 
                 <div>
                     <label class="f-label">Email do usuario*</label>
                     <input type="email" class="f-input" name="email" placeholder="Ex: matheus@gamil.com"
-                           value="<?= $modoEdicao ? htmlspecialchars($userAtual->email) : '' ?>" required>
+                        value="<?= $modoEdicao ? htmlspecialchars($userAtual->email) : '' ?>" required>
                 </div>
                 <div>
                     <label class="f-label">Login do usuario*</label>
                     <input class="f-input" name="login" placeholder="Ex: matheus-123"
-                           value="<?= $modoEdicao ? htmlspecialchars($userAtual->login) : '' ?>" required>
+                        value="<?= $modoEdicao ? htmlspecialchars($userAtual->login) : '' ?>" required>
                 </div>
                 <div>
                     <label class="f-label">Senha do usuario<?= $modoEdicao ? ' (deixe em branco para manter a atual)' : '*' ?></label>
                     <input type="password" class="f-input" name="senha" placeholder="Ex: xxxxxxxxx"
-                           value="" <?= $modoEdicao ? '' : 'required' ?>>
+                        value="" <?= $modoEdicao ? '' : 'required' ?>>
                 </div>
             </div>
 
@@ -137,8 +139,7 @@ if ($modoEdicao) {
     if (botaoFechar) botaoFechar.addEventListener("click", fecharModal);
     if (botaoCancelar) botaoCancelar.addEventListener("click", fecharModal);
 
-    // Botões "Editar" recarregam a página com os parâmetros certos,
-    // o PHP acima detecta isso e já abre o modal preenchido.
+
     document.querySelectorAll(".btn-editar").forEach(btn => {
         btn.addEventListener("click", () => {
             const id = btn.dataset.id;
@@ -147,7 +148,7 @@ if ($modoEdicao) {
     });
 
     <?php if ($modoEdicao): ?>
-    // Já abre o modal automaticamente ao recarregar em modo edição
-    window.addEventListener("DOMContentLoaded", abrirModal);
+
+        window.addEventListener("DOMContentLoaded", abrirModal);
     <?php endif; ?>
 </script>

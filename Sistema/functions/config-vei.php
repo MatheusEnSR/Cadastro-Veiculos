@@ -29,9 +29,9 @@ switch ($acao) {
         $cor = $_POST["cor"] ?? '';
         $ano = $_POST["ano"] ?? '';
 
-        $sql = "UPDATE veiculos SET placa = ?, cor, ano = ? WHERE id = ?";
+        $sql = "UPDATE veiculos SET placa = ?, cor = ?, ano = ? WHERE id = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssi", $placa, $cor, $ano,  $id);
+        $stmt->bind_param("sssi", $placa, $cor, $ano,  $id);
         $res = $stmt->execute();
         $stmt->close();
 

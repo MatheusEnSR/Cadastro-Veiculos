@@ -83,7 +83,7 @@ if ($modoEdicao) {
 
                 <div>
                     <label class="f-label">Marca do veículo*</label>
-                    <input class="f-input" name="marca" placeholder="Ex: Toyota"
+                    <input class="f-input" name="marca" placeholder="Ex: Honda      "
                            value="<?= $modoEdicao ? htmlspecialchars($modeloAtual->marca) : '' ?>" required>
                 </div>
             </div>

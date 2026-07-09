@@ -15,7 +15,7 @@ switch ($acao) {
         $senha = $_POST["senha"] ?? '';
 
         if ($nome === '' || $email === '' || $login === '' || $senha === '') {
-            print "<script>alert('Preencha todos os campos obrigatórios'); location.href='?page=cad-user';</script>";
+            print "<script>alert('Preencha todos os campos obrigatórios'); location.href='?page=home&view=cad-user';</script>";
             break;
         }
 
@@ -25,7 +25,7 @@ switch ($acao) {
         $stmt = $conn->prepare($sql);
 
         if (!$stmt) {
-            print "<script>alert('Erro ao preparar cadastro: " . addslashes($conn->error) . "'); location.href='?page=cad-user';</script>";
+            print "<script>alert('Erro ao preparar cadastro: " . addslashes($conn->error) . "'); location.href='?page=home&view=cad-user';</script>";
             break;
         }
 
@@ -34,9 +34,9 @@ switch ($acao) {
         $stmt->close();
 
         if ($res) {
-            print "<script>alert('Cadastrado com sucesso'); location.href='?page=cad-user';</script>";
+            print "<script>alert('Cadastrado com sucesso'); location.href='?page=home&view=cad-user';</script>";
         } else {
-            print "<script>alert('Não foi possível cadastrar'); location.href='?page=cad-user';</script>";
+            print "<script>alert('Não foi possível cadastrar'); location.href='?page=home&view=cad-user';</script>";
         }
         break;
 
@@ -48,7 +48,7 @@ switch ($acao) {
         $senhaPura = $_POST["senha"] ?? '';
 
         if ((int)$id <= 0) {
-            print "<script>alert('ID inválido para edição'); location.href='?page=cad-user';</script>";
+            print "<script>alert('ID inválido para edição'); location.href='?page=home&view=cad-user';</script>";
             break;
         }
 
@@ -58,7 +58,7 @@ switch ($acao) {
             $stmt = $conn->prepare($sql);
 
             if (!$stmt) {
-                print "<script>alert('Erro SQL: " . addslashes($conn->error) . "'); location.href='?page=cad-user';</script>";
+                print "<script>alert('Erro SQL: " . addslashes($conn->error) . "'); location.href='?page=home&view=cad-user';</script>";
                 break;
             }
 
@@ -68,7 +68,7 @@ switch ($acao) {
             $stmt = $conn->prepare($sql);
 
             if (!$stmt) {
-                print "<script>alert('Erro SQL: " . addslashes($conn->error) . "'); location.href='?page=cad-user';</script>";
+                print "<script>alert('Erro SQL: " . addslashes($conn->error) . "'); location.href='?page=home&view=cad-user';</script>";
                 break;
             }
 
